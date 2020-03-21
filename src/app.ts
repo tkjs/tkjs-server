@@ -1,8 +1,8 @@
 import cors from "cors";
 import express from "express";
-import { Request } from "express";
-import { Response } from "express";
 import { Application } from "express";
+
+import routes from "./routes";
 
 class App {
   private app: Application;
@@ -20,9 +20,7 @@ class App {
   }
 
   private routes(): void {
-    this.app.use("/", function(req: Request, res: Response) {
-      res.json({ message: "Server alive" });
-    });
+    this.app.use("/", routes);
   }
 
   public run(): void {
