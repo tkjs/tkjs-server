@@ -16,3 +16,7 @@ export interface StoreInterface {
   lobby?: SessionInterface;
   gameworld?: SessionInterface;
 }
+
+export interface RegionIdsInterface {
+  [regionId: string]: Array<string>;
+}
