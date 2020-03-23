@@ -1,8 +1,10 @@
 import cors from "cors";
+import morgan from "morgan";
 import express from "express";
 import { Application } from "express";
 
 import routes from "./routes";
+import errorHandler from "./middlewares/error-handler";
 
 class App {
   private app: Application;
@@ -15,8 +17,10 @@ class App {
 
   private config(): void {
     this.app.use(cors());
+    this.app.use(morgan("tiny"));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(errorHandler);
   }
 
   private routes(): void {
