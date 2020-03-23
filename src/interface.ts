@@ -20,3 +20,9 @@ export interface StoreInterface {
 export interface RegionIdsInterface {
   [regionId: string]: Array<string>;
 }
+
+export interface RequestPayloadInterface {
+  action: string;
+  controller: string;
+  params: any;
+}
