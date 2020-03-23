@@ -10,6 +10,8 @@ import * as sessionAction from "./session/actions";
 
 import { UndefinedTypeError } from "../errors";
 
+type ActionTypes = "msid" | "account" | "lobby" | "gameworld";
+
 const rootReducer = combineReducers({
   msid,
   account,
@@ -21,7 +23,7 @@ const store = createStore(rootReducer);
 
 export default store;
 
-export function updateState(type: string, value: any): void {
+export function updateState(type: ActionTypes, value: any): void {
   switch (type) {
     case "msid":
       store.dispatch(msidAction.updateMsid(value));
@@ -44,7 +46,7 @@ export function updateState(type: string, value: any): void {
   }
 }
 
-export function resetState(type: string): void {
+export function resetState(type: ActionTypes): void {
   switch (type) {
     case "msid":
       store.dispatch(msidAction.resetMsid());
