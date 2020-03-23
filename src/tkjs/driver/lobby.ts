@@ -13,7 +13,7 @@ import { SessionInterface, RequestPayloadInterface, StoreInterface } from "../..
 class Lobby {
   static driver: AxiosInstance = axios.create({ headers: { ...userAgent } });
 
-  static async authenticate(email: string, password: string) {
+  static async authenticate(email: string, password: string): Promise<void> {
     try {
       let msid: string;
       let token: string;
@@ -58,7 +58,7 @@ class Lobby {
     }
   }
 
-  static async hitServer({ action, controller, params }: RequestPayloadInterface) {
+  static async hitServer({ action, controller, params }: RequestPayloadInterface): Promise<any> {
     const { msid, lobby }: StoreInterface = store.getState();
     const { session, cookie: lobbyCookie }: SessionInterface = lobby;
 
@@ -75,7 +75,7 @@ class Lobby {
     return response.data;
   }
 
-  static async getCache(params: any) {
+  static async getCache(params: any): Promise<any> {
     const payload: RequestPayloadInterface = {
       action: "get",
       controller: "cache",
@@ -86,7 +86,7 @@ class Lobby {
     return data;
   }
 
-  static async getAvatarList() {
+  static async getAvatarList(): Promise<Array<any>> {
     const data: any = await Lobby.getCache({ names: ["Collection:Avatar"] });
     return data.cache[0].data.cache.map((avatar: any) => avatar.data); // only need avatar data
   }
