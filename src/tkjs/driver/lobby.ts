@@ -1,7 +1,6 @@
 import qs from "qs";
 import axios from "axios";
-import { AxiosInstance } from "axios";
-import { AxiosResponse } from "axios";
+import { AxiosInstance, AxiosResponse } from "axios";
 
 import URL from "./url";
 import store from "../store";
@@ -32,7 +31,7 @@ class Lobby {
       );
       token = extractor({ type: "token", value: response.data });
 
-      response = await this.driver.get(URL.GENERATE_LOBBY_SESSION(token), {
+      response = await Lobby.driver.get(URL.GENERATE_LOBBY_SESSION(token), {
         maxRedirects: 0,
         validateStatus: status => status >= 200 && status < 303,
       });
@@ -67,7 +66,7 @@ class Lobby {
 
     const cookie = lobbyCookie + msid;
 
-    const response: AxiosResponse = await this.driver.post(
+    const response: AxiosResponse = await Lobby.driver.post(
       URL.LOBBY_API,
       { action, controller, params, session },
       { headers: { cookie } }
