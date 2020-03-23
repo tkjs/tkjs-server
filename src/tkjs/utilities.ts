@@ -44,28 +44,28 @@ export function convertToCoordinate(cellId: string): Array<number> {
 }
 
 export function extractMsid(source: string): string {
-  const msid: string | null = /msid=([\w]*)&msname/g.exec(source);
+  const msid: any = /msid=([\w]*)&msname/g.exec(source);
   if (!msid) throw new ExtractorNotFoundError("MSID not found");
   return msid[1];
 }
 
 export function extractToken(source: string): string {
-  const token: string | null = /token=([\w]*)&msid/g.exec(source);
+  const token: any = /token=([\w]*)&msid/g.exec(source);
   if (!token) throw new ExtractorNotFoundError("Token not found");
   return token[1];
 }
 
 export function extractSession(source: string): string {
-  const session: string | null = /%7B%22key%22%3A%22([\w]*)%22%2C%22/g.exec(source);
+  const session: any = /%7B%22key%22%3A%22([\w]*)%22%2C%22/g.exec(source);
   if (!session) throw new ExtractorNotFoundError("Session not found");
   return session[1];
 }
 
 export function extractSessionAge(source: string): Date {
-  return new Date(cookieString.split(";")[1].split("=")[1]);
+  return new Date(source.split(";")[1].split("=")[1]);
 }
 
-export function extractor({ type, value }: { type: string; value: string }): string | Date {
+export function extractor({ type, value }: { type: string; value: any }): any {
   switch (type) {
     case "msid":
       return extractMsid(value);
