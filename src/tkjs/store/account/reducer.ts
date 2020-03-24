@@ -1,5 +1,5 @@
 import { AccountInterface } from "../../../interface";
-import { UPDATE_ACCOUNT, RESET_ACCOUNT, AccountAction } from "./types";
+import { UPDATE_ACCOUNT, RESET_ACCOUNT, RESET_WORLDNAME, AccountAction } from "./types";
 
 const initState: AccountInterface = {
   email: "",
@@ -16,6 +16,13 @@ export default function accountReducer(
       return {
         ...state,
         ...action.account
+      };
+      break;
+
+    case RESET_WORLDNAME:
+      return {
+        ...state,
+        worldname: ''
       };
       break;
 

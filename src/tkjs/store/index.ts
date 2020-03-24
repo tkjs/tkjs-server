@@ -68,3 +68,7 @@ export function resetState(type: ActionTypes): void {
       throw new UndefinedTypeError(`Undefined reset state type: ${type}`);
   }
 }
+
+export function resetWorldname(): void {
+  store.dispatch(accountAction.resetWorldname())
+}
