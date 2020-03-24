@@ -64,7 +64,7 @@ class Lobby {
 
     if (!msid || !session || !lobbyCookie) throw new SessionNotFoundError();
 
-    const cookie = lobbyCookie + msid;
+    const cookie: string = lobbyCookie + msid;
 
     const response: AxiosResponse = await Lobby.driver.post(
       URL.LOBBY_API,
