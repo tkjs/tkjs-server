@@ -36,9 +36,7 @@ class URL {
 
     if (!msid) throw new SessionNotFoundError();
 
-    return (
-      URL.MELLON_URL + `/authentication/login/ajax/form-validate?msid=${msid}&msname=msid`
-    );
+    return URL.MELLON_URL + `/authentication/login/ajax/form-validate?msid=${msid}&msname=msid`;
   }
 
   static GENERATE_LOBBY_SESSION(token: string) {
@@ -56,9 +54,7 @@ class URL {
     if (!msid) throw new SessionNotFoundError();
     if (!gameworldId) throw new BadRequestError("Gameworld id is required");
 
-    return (
-      URL.MELLON_URL + `/game-world/join/gameWorldId/${gameworldId}?msid=${msid}&msname=msid`
-    );
+    return URL.MELLON_URL + `/game-world/join/gameWorldId/${gameworldId}?msid=${msid}&msname=msid`;
   }
 
   static GENERATE_GAMEWORLD_SESSION(token: string) {

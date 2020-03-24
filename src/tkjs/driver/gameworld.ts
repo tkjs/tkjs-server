@@ -5,8 +5,8 @@ import URL from "./url";
 import store from "../store";
 import { userAgent } from "../constants";
 import { extractor } from "../utilities";
+import { SessionInterface } from "../../interface";
 import { updateState, resetState, resetWorldname } from "../store";
-import { SessionInterface } from '../../interface'
 
 class Gameworld {
   static driver: AxiosInstance = axios.create({ headers: { ...userAgent } });
@@ -48,4 +48,4 @@ class Gameworld {
   }
 }
 
-export default Gameworld
+export default Gameworld;

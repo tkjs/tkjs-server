@@ -1,13 +1,11 @@
-import { Router } from "express";
-import { Request } from "express";
-import { Response } from "express";
+import { Router, Request, Response } from "express";
 
 import lobbyRouter from "./lobby-router";
 import gameworldRouter from "./gameworld-router";
 
 const router: Router = Router();
 
-router.get("/", function(req: Request, res: Response) {
+router.get("/", function (req: Request, res: Response) {
   res.json({ message: "Server alive!" });
 });
 router.use("/lobby", lobbyRouter);

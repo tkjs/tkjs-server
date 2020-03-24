@@ -1,6 +1,4 @@
-import { Request } from "express";
-import { Response } from "express";
-import { NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 
 class LobbyController {
   static getState(req: Request, res: Response, next: NextFunction) {
@@ -13,7 +11,7 @@ class LobbyController {
 
   static async authenticate(req: Request, res: Response, next: NextFunction) {
     res.json({
-      message: "Welcome to lobby controller with authenticate route"
+      message: "Welcome to lobby controller with authenticate route",
     });
   }
 

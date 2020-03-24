@@ -4,25 +4,22 @@ import { UPDATE_ACCOUNT, RESET_ACCOUNT, RESET_WORLDNAME, AccountAction } from ".
 const initState: AccountInterface = {
   email: "",
   password: "",
-  worldname: ""
+  worldname: "",
 };
 
-export default function accountReducer(
-  state = initState,
-  action: AccountAction
-): AccountInterface {
+export default function accountReducer(state = initState, action: AccountAction): AccountInterface {
   switch (action.type) {
     case UPDATE_ACCOUNT:
       return {
         ...state,
-        ...action.account
+        ...action.account,
       };
       break;
 
     case RESET_WORLDNAME:
       return {
         ...state,
-        worldname: ''
+        worldname: "",
       };
       break;
 
@@ -30,7 +27,7 @@ export default function accountReducer(
       return {
         email: "",
         password: "",
-        worldname: ""
+        worldname: "",
       };
       break;
 

@@ -15,7 +15,4 @@ export interface ResetSession {
 }
 
 export type SessionAction = UpdateSession | ResetSession;
-export type SessionReducer = (
-  state: SessionInterface,
-  action: SessionAction
-) => SessionInterface;
+export type SessionReducer = (state: SessionInterface, action: SessionAction) => SessionInterface;

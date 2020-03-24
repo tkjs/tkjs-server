@@ -2,7 +2,7 @@ import { AccountInterface } from "../../../interface";
 
 export const UPDATE_ACCOUNT = "UPDATE_ACCOUNT";
 export const RESET_ACCOUNT = "RESET_ACCOUNT";
-export const RESET_WORLDNAME = 'RESET_WORLDNAME';
+export const RESET_WORLDNAME = "RESET_WORLDNAME";
 
 export interface UpdateAccount {
   type: typeof UPDATE_ACCOUNT;

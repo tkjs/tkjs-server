@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   msid,
   account,
   lobby: createSession("lobby"),
-  gameworld: createSession("gameworld")
+  gameworld: createSession("gameworld"),
 });
 
 const store = createStore(rootReducer);
@@ -70,5 +70,5 @@ export function resetState(type: ActionTypes): void {
 }
 
 export function resetWorldname(): void {
-  store.dispatch(accountAction.resetWorldname())
+  store.dispatch(accountAction.resetWorldname());
 }
