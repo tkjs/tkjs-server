@@ -31,3 +31,36 @@ export interface CoordinateInterface {
   x: number;
   y: number;
 }
+
+/* ---- Map interface section ---- */
+
+export interface CellInterface {
+  id: string;
+  owner: string;
+  landscape: string;
+  playerId?: string;
+  resType?: string;
+  village?: VillageInterface;
+  oasis?: OasisInterface;
+}
+
+export interface VillageInterface {
+  villageId: string;
+  name: string;
+  population: string;
+  type: string;
+  hasActiveTreasury: boolean;
+  influenceSize?: number;
+  treasures?: string;
+}
+
+export interface OasisInterface {
+  bonus: any;
+  units: Array<any>;
+  type: string;
+  oasisStatus: string;
+  kingdomId: string;
+  kingId: string;
+}
+
+/* --- End of Map interface section --- */
