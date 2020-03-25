@@ -1,11 +1,11 @@
-import { SessionInterface } from "../../../interface";
+import { Session } from "../../../interface";
 
 export const UPDATE_SESSION = "UPDATE_SESSION";
 export const RESET_SESSION = "RESET_SESSION";
 
 export interface UpdateSession {
   name: string;
-  session: SessionInterface;
+  session: Session;
   type: typeof UPDATE_SESSION;
 }
 
@@ -15,4 +15,4 @@ export interface ResetSession {
 }
 
 export type SessionAction = UpdateSession | ResetSession;
-export type SessionReducer = (state: SessionInterface, action: SessionAction) => SessionInterface;
+export type SessionReducer = (state: Session, action: SessionAction) => Session;

@@ -1,50 +1,50 @@
-export interface SessionInterface {
+export interface Session {
   session?: string;
   cookie?: string;
   age?: Date;
 }
 
-export interface AccountInterface {
+export interface Account {
   email?: string;
   password?: string;
   worldname?: string;
 }
 
-export interface StoreInterface {
+export interface Store {
   msid?: string;
-  account?: AccountInterface;
-  lobby?: SessionInterface;
-  gameworld?: SessionInterface;
+  account?: Account;
+  lobby?: Session;
+  gameworld?: Session;
 }
 
-export interface RegionIdsInterface {
+export interface RegionIds {
   [regionId: string]: Array<string>;
 }
 
-export interface RequestPayloadInterface {
+export interface RequestPayload {
   action: string;
   controller: string;
   params: any;
 }
 
-export interface CoordinateInterface {
+export interface Coordinate {
   x: number;
   y: number;
 }
 
 /* ---- Map interface section ---- */
 
-export interface CellInterface {
+export interface Cell {
   id: string;
   owner: string;
   landscape: string;
   playerId?: string;
   resType?: string;
-  village?: VillageInterface;
-  oasis?: OasisInterface;
+  village?: Village;
+  oasis?: Oasis;
 }
 
-export interface VillageInterface {
+export interface Village {
   villageId: string;
   name: string;
   population: string;
@@ -54,7 +54,7 @@ export interface VillageInterface {
   treasures?: string;
 }
 
-export interface OasisInterface {
+export interface Oasis {
   bonus: any;
   units: Array<any>;
   type: string;

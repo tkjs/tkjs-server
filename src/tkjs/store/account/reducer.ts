@@ -1,13 +1,13 @@
-import { AccountInterface } from "../../../interface";
+import { Account } from "../../../interface";
 import { UPDATE_ACCOUNT, RESET_ACCOUNT, RESET_WORLDNAME, AccountAction } from "./types";
 
-const initState: AccountInterface = {
+const initState: Account = {
   email: "",
   password: "",
   worldname: "",
 };
 
-export default function accountReducer(state = initState, action: AccountAction): AccountInterface {
+export default function accountReducer(state = initState, action: AccountAction): Account {
   switch (action.type) {
     case UPDATE_ACCOUNT:
       return {

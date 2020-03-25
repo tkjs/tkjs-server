@@ -1,4 +1,4 @@
-import { CoordinateInterface } from "../interface";
+import { Coordinate } from "../interface";
 import { ExtractorNotFoundError, UndefinedTypeError } from "./errors";
 
 export function range(_p: number, _t?: number, _s?: number): Array<number> {
@@ -30,7 +30,7 @@ export function convertToCellId(x: number, y: number): string {
   return String(rx + ry);
 }
 
-export function convertToCoordinate(cellId: string): CoordinateInterface {
+export function convertToCoordinate(cellId: string): Coordinate {
   let binary: string = parseInt(cellId, 10).toString(2);
 
   if (binary.length < 30) binary = "0" + binary;
@@ -89,6 +89,6 @@ export function extractor({ type, value }: { type: string; value: any }): any {
   }
 }
 
-export function distance(source: CoordinateInterface, target: CoordinateInterface): number {
+export function distance(source: Coordinate, target: Coordinate): number {
   return Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2);
 }

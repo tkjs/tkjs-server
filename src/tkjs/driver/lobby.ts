@@ -8,7 +8,7 @@ import { userAgent } from "../constants";
 import { extractor } from "../utilities";
 import { SessionNotFoundError } from "../errors";
 import { updateState, resetState } from "../store";
-import { SessionInterface, RequestPayloadInterface, StoreInterface } from "../../interface";
+import { Session, RequestPayload, Store } from "../../interface";
 
 class Lobby {
   static driver: AxiosInstance = axios.create({ headers: { ...userAgent } });
@@ -17,7 +17,7 @@ class Lobby {
     try {
       let msid: string;
       let token: string;
-      let lobby: SessionInterface = { session: "", cookie: "", age: new Date() };
+      let lobby: Session = { session: "", cookie: "", age: new Date() };
       let response: AxiosResponse;
 
       response = await Lobby.driver.get(URL.GET_MSID);
@@ -58,9 +58,9 @@ class Lobby {
     }
   }
 
-  static async hitServer({ action, controller, params }: RequestPayloadInterface): Promise<any> {
-    const { msid, lobby }: StoreInterface = store.getState();
-    const { session, cookie: lobbyCookie }: SessionInterface = lobby;
+  static async hitServer({ action, controller, params }: RequestPayload): Promise<any> {
+    const { msid, lobby }: Store = store.getState();
+    const { session, cookie: lobbyCookie }: Session = lobby;
 
     if (!msid || !session || !lobbyCookie) throw new SessionNotFoundError();
 
@@ -76,7 +76,7 @@ class Lobby {
   }
 
   static async getCache(params: any): Promise<any> {
-    const payload: RequestPayloadInterface = {
+    const payload: RequestPayload = {
       action: "get",
       controller: "cache",
       params,

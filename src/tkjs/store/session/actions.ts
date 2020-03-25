@@ -1,7 +1,7 @@
-import { SessionInterface } from "../../../interface";
+import { Session } from "../../../interface";
 import { UPDATE_SESSION, RESET_SESSION, SessionAction } from "./types";
 
-export function updateSession(name: string, session: SessionInterface): SessionAction {
+export function updateSession(name: string, session: Session): SessionAction {
   return {
     name,
     session,

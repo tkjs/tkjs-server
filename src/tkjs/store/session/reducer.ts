@@ -1,13 +1,13 @@
-import { SessionInterface } from "../../../interface";
+import { Session } from "../../../interface";
 import { UPDATE_SESSION, RESET_SESSION, SessionAction, SessionReducer } from "./types";
 
-const initState: SessionInterface = {
+const initState: Session = {
   session: "",
   cookie: "",
   age: new Date(),
 };
 
-function sessionReducer(state = initState, action: SessionAction): SessionInterface {
+function sessionReducer(state = initState, action: SessionAction): Session {
   switch (action.type) {
     case UPDATE_SESSION:
       return {
@@ -30,7 +30,7 @@ function sessionReducer(state = initState, action: SessionAction): SessionInterf
 }
 
 export default function createNamedWrapperReducer(reducerName: string): SessionReducer {
-  return function (state: SessionInterface, action: SessionAction): SessionInterface {
+  return function (state: Session, action: SessionAction): Session {
     const { name } = action;
     const isInitializationCall: boolean = state === undefined;
     if (name !== reducerName && !isInitializationCall) return state;

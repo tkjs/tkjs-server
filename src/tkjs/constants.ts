@@ -1,12 +1,12 @@
-import { RegionIdsInterface } from "../interface";
+import { RegionIds } from "../interface";
 import { convertToCellId, range } from "./utilities";
 
 export const userAgent = {
   "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0) Gecko/20100101 Firefox/73.0",
 };
 
-function generateRegionIds(): RegionIdsInterface {
-  const regionIds: RegionIdsInterface = {};
+function generateRegionIds(): RegionIds {
+  const regionIds: RegionIds = {};
   let regionId: string;
 
   for (let x of range(-13, 14)) {

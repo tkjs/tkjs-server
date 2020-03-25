@@ -1,11 +1,11 @@
-import { CellInterface } from "../interface";
+import { Cell } from "../interface";
 
 class Map {
-  private cellList: Array<CellInterface>;
+  private cellList: Array<Cell>;
   private playerList: Array<any>;
   private kingdomList: Array<any>;
 
-  constructor(cells: Array<CellInterface>, players: Array<any>, kingdoms: Array<any>) {
+  constructor(cells: Array<Cell>, players: Array<any>, kingdoms: Array<any>) {
     this.cellList = cells;
     this.playerList = players;
     this.kingdomList = kingdoms;

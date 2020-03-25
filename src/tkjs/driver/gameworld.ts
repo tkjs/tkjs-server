@@ -2,14 +2,13 @@ import axios from "axios";
 import { AxiosInstance, AxiosResponse } from "axios";
 
 import URL from "./url";
+import Map from "../map";
 import store from "../store";
 import { extractor, range } from "../utilities";
 import { SessionNotFoundError } from "../errors";
 import { userAgent, regionIds } from "../constants";
 import { updateState, resetState, resetWorldname } from "../store";
-import { SessionInterface, RequestPayloadInterface, StoreInterface } from "../../interface";
-
-import Map from "../map";
+import { RequestPayload, Session, Store, Cell } from "../../interface";
 
 class Gameworld {
   static driver: AxiosInstance = axios.create({ headers: { ...userAgent } });
@@ -17,7 +16,7 @@ class Gameworld {
   static async authenticate(gameworldId: string, worldname: string): Promise<void> {
     try {
       let token: string;
-      let gameworld: SessionInterface = { session: "", cookie: "", age: new Date() };
+      let gameworld: Session = { session: "", cookie: "", age: new Date() };
       let response: AxiosResponse;
 
       updateState("account", { worldname });
@@ -50,10 +49,10 @@ class Gameworld {
     }
   }
 
-  static async hitServer({ action, controller, params }: RequestPayloadInterface): Promise<any> {
-    const { msid, lobby, gameworld }: StoreInterface = store.getState();
-    const { cookie: lobbyCookie }: SessionInterface = lobby;
-    const { cookie: gameworldCookie, session: gameworldSession }: SessionInterface = gameworld;
+  static async hitServer({ action, controller, params }: RequestPayload): Promise<any> {
+    const { msid, lobby, gameworld }: Store = store.getState();
+    const { cookie: lobbyCookie }: Session = lobby;
+    const { cookie: gameworldCookie, session: gameworldSession }: Session = gameworld;
 
     if (!msid || !lobbyCookie || !gameworldCookie || !gameworldSession) {
       throw new SessionNotFoundError();
@@ -72,7 +71,7 @@ class Gameworld {
   }
 
   static async getCache(params: any): Promise<any> {
-    const payload: RequestPayloadInterface = {
+    const payload: RequestPayload = {
       action: "get",
       controller: "cache",
       params,
@@ -87,10 +86,10 @@ class Gameworld {
     return data.cache[0].data.cache.map((village: any) => village.data); // only need village data
   }
 
-  static async getMap(regionList: Array<string> = Object.keys(regionIds)): Promise<any> {
+  static async getMap(regionList: Array<string> = Object.keys(regionIds)): Promise<Map> {
     const req_list: { [id: string]: Array<string> } = { "1": regionList };
 
-    const payload: RequestPayloadInterface = {
+    const payload: RequestPayload = {
       action: "getByRegionIds",
       controller: "map",
       params: {
@@ -100,14 +99,14 @@ class Gameworld {
 
     const response: any = await Gameworld.hitServer(payload);
 
-    let cellList: Array<any> = [];
+    let cellList: Array<Cell> = [];
     let playerList: Array<any> = [];
     let kingdomList: Array<any> = [];
 
     // collecting cell
     // response.response['1'].region is an object with key is regionId and value is another object
     cellList = Object.keys(response.response["1"].region).reduce(
-      (result: Array<any>, regionId: string) => {
+      (result: Array<Cell>, regionId: string) => {
         // response.response['1'].region[regionId] is an object with value is array of object literal
         return [...result, ...response.response["1"].region[regionId]];
       },

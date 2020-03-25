@@ -1,5 +1,5 @@
 import store from "../store";
-import { StoreInterface, AccountInterface } from "../../interface";
+import { Store, Account } from "../../interface";
 import { SessionNotFoundError, BadRequestError } from "../errors";
 
 class URL {
@@ -12,7 +12,7 @@ class URL {
   }
 
   static get GAMEWORLD_URL() {
-    const { worldname }: AccountInterface = store.getState().account;
+    const { worldname }: Account = store.getState().account;
 
     if (!worldname) throw new SessionNotFoundError();
 
@@ -32,7 +32,7 @@ class URL {
   }
 
   static GENERATE_LOBBY_TOKEN() {
-    const { msid }: StoreInterface = store.getState();
+    const { msid }: Store = store.getState();
 
     if (!msid) throw new SessionNotFoundError();
 
@@ -40,7 +40,7 @@ class URL {
   }
 
   static GENERATE_LOBBY_SESSION(token: string) {
-    const { msid }: StoreInterface = store.getState();
+    const { msid }: Store = store.getState();
 
     if (!msid) throw new SessionNotFoundError();
     if (!token) throw new BadRequestError("Token is required");
@@ -49,7 +49,7 @@ class URL {
   }
 
   static GENERATE_GAMEWORLD_TOKEN(gameworldId: string) {
-    const { msid }: StoreInterface = store.getState();
+    const { msid }: Store = store.getState();
 
     if (!msid) throw new SessionNotFoundError();
     if (!gameworldId) throw new BadRequestError("Gameworld id is required");
@@ -58,7 +58,7 @@ class URL {
   }
 
   static GENERATE_GAMEWORLD_SESSION(token: string) {
-    const { msid }: StoreInterface = store.getState();
+    const { msid }: Store = store.getState();
 
     if (!msid) throw new SessionNotFoundError();
     if (!token) throw new BadRequestError("Token is required");

@@ -1,7 +1,7 @@
-import { AccountInterface } from "../../../interface";
+import { Account } from "../../../interface";
 import { UPDATE_ACCOUNT, RESET_ACCOUNT, RESET_WORLDNAME, AccountAction } from "./types";
 
-export function updateAccount(account: AccountInterface): AccountAction {
+export function updateAccount(account: Account): AccountAction {
   return {
     type: UPDATE_ACCOUNT,
     account,
