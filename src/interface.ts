@@ -26,3 +26,8 @@ export interface RequestPayloadInterface {
   controller: string;
   params: any;
 }
+
+export interface CoordinateInterface {
+  x: number;
+  y: number;
+}
