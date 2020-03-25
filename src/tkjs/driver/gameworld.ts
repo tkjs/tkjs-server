@@ -3,11 +3,13 @@ import { AxiosInstance, AxiosResponse } from "axios";
 
 import URL from "./url";
 import store from "../store";
-import { userAgent } from "../constants";
-import { extractor } from "../utilities";
-import { SessionNotFoundError } from '../errors'
+import { extractor, range } from "../utilities";
+import { SessionNotFoundError } from "../errors";
+import { userAgent, regionIds } from "../constants";
 import { updateState, resetState, resetWorldname } from "../store";
 import { SessionInterface, RequestPayloadInterface, StoreInterface } from "../../interface";
+
+import Map from '../map'
 
 class Gameworld {
   static driver: AxiosInstance = axios.create({ headers: { ...userAgent } });
@@ -83,6 +85,53 @@ class Gameworld {
   static async getOwnVillageList(): Promise<Array<any>> {
     const data: any = await Gameworld.getCache({ names: ["Collection:Village:own"] });
     return data.cache[0].data.cache.map((village: any) => village.data); // only need village data
+  }
+
+  static async getMap(regionList: Array<string> = Object.keys(regionIds)): Promise<any> {
+    const req_list: { [id: string]: Array<string> } = { "1": regionList };
+
+    const payload: RequestPayloadInterface = {
+      action: "getByRegionIds",
+      controller: "map",
+      params: {
+        regionIdCollection: req_list,
+      },
+    };
+
+    const response: any = await Gameworld.hitServer(payload);
+
+    let cellList: Array<any> = [];
+    let playerList: Array<any> = [];
+    let kingdomList: Array<any> = [];
+
+    // collecting cell
+    // response.response['1'].region is an object with key is regionId and value is another object
+    cellList = Object.keys(response.response["1"].region).reduce(
+      (result: Array<any>, regionId: string) => {
+        // response.response['1'].region[regionId] is an object with value is array of object literal
+        return [...result, ...response.response["1"].region[regionId]];
+      },
+      []
+    );
+
+    // collecting player
+    // response.response['1'].player is an object with key is playerId and value is object literal
+    playerList = Object.keys(response.response["1"].player).map((playerId: string) => {
+      return { ...response.response["1"].player[playerId], playerId };
+    });
+
+    // collecting kingdom
+    // response.response['1'].kingdom is an object with key is kingdomId and value is object literal
+    kingdomList = Object.keys(response.response["1"].player).map((kingdomId: string) => {
+      return { ...response.response["1"].kingdom[kingdomId], kingdomId };
+    });
+
+    // console.log(cellList);
+    // console.log(playerList);
+    // console.log(kingdomList);
+    // return cellList;
+
+    return new Map(cellList, playerList, kingdomList)
   }
 }
 
