@@ -9,7 +9,7 @@ import { userAgent, regionIds } from "../constants";
 import { updateState, resetState, resetWorldname } from "../store";
 import { SessionInterface, RequestPayloadInterface, StoreInterface } from "../../interface";
 
-import Map from '../map'
+import Map from "../map";
 
 class Gameworld {
   static driver: AxiosInstance = axios.create({ headers: { ...userAgent } });
@@ -126,12 +126,7 @@ class Gameworld {
       return { ...response.response["1"].kingdom[kingdomId], kingdomId };
     });
 
-    // console.log(cellList);
-    // console.log(playerList);
-    // console.log(kingdomList);
-    // return cellList;
-
-    return new Map(cellList, playerList, kingdomList)
+    return new Map(cellList, playerList, kingdomList);
   }
 }
 

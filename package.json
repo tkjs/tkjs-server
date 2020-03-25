@@ -4,17 +4,18 @@
   "description": "server side of tkjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-script": "NODE_ENV=development npx ts-node test.ts",
     "dev": "npx nodemon",
-    "build": "tsc"
+    "build": "tsc",
+    "prettier": "npx prettier --config .prettierrc --write ./src/**/*"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tkjs/tkjs-server.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "didadadida93",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/tkjs/tkjs-server/issues"
   },
