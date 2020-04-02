@@ -58,7 +58,7 @@ class Lobby {
     }
   }
 
-  static async hitServer({ action, controller, params }: RequestPayload): Promise<any> {
+  static async request({ action, controller, params }: RequestPayload): Promise<any> {
     const { msid, lobby }: Store = store.getState();
     const { session, cookie: lobbyCookie }: Session = lobby;
 
@@ -82,7 +82,7 @@ class Lobby {
       params,
     };
 
-    const data: any = await Lobby.hitServer(payload);
+    const data: any = await Lobby.request(payload);
     return data;
   }
 

@@ -49,7 +49,7 @@ class Gameworld {
     }
   }
 
-  static async hitServer({ action, controller, params }: RequestPayload): Promise<any> {
+  static async request({ action, controller, params }: RequestPayload): Promise<any> {
     const { msid, lobby, gameworld }: Store = store.getState();
     const { cookie: lobbyCookie }: Session = lobby;
     const { cookie: gameworldCookie, session: gameworldSession }: Session = gameworld;
@@ -77,7 +77,7 @@ class Gameworld {
       params,
     };
 
-    const data: any = await Gameworld.hitServer(payload);
+    const data: any = await Gameworld.request(payload);
     return data;
   }
 
@@ -97,7 +97,7 @@ class Gameworld {
       },
     };
 
-    const response: any = await Gameworld.hitServer(payload);
+    const response: any = await Gameworld.request(payload);
 
     let cellList: Array<Cell> = [];
     let playerList: Array<any> = [];
