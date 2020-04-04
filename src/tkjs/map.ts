@@ -31,7 +31,7 @@ class Map {
     return this.cellList.filter(cell => !cell.oasis && !cell.resType);
   }
 
-  get players(): Array<Cell> {
+  get players(): Array<Player> {
     return this.playerList
   }
 
