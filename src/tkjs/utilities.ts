@@ -92,3 +92,7 @@ export function extractor({ type, value }: { type: string; value: any }): any {
 export function distance(source: Coordinate, target: Coordinate): number {
   return Math.sqrt((source.x - target.x) ** 2 + (source.y - target.y) ** 2);
 }
+
+export function sleep(miliseconds: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, miliseconds * 1000))
+}
