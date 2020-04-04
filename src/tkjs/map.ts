@@ -1,9 +1,9 @@
-import { Cell } from "../interface";
+import { Cell, Player, Kingdom } from "../interface/map";
 
 class Map {
   private cellList: Array<Cell>;
-  private playerList: Array<any>;
-  private kingdomList: Array<any>;
+  private playerList: Array<Player>;
+  private kingdomList: Array<Kingdom>;
 
   constructor(cells: Array<Cell>, players: Array<any>, kingdoms: Array<any>) {
     this.cellList = cells;
@@ -11,24 +11,36 @@ class Map {
     this.kingdomList = kingdoms;
   }
 
-  get cell() {
+  get cell(): Array<Cell> {
     return this.cellList;
   }
 
-  get villages() {
+  get villages(): Array<Cell> {
     return this.cellList.filter(cell => cell.village);
   }
 
-  get tiles() {
+  get tiles(): Array<Cell> {
     return this.cellList.filter(cell => !cell.village && cell.resType);
   }
 
-  get oasis() {
+  get oasis(): Array<Cell> {
     return this.cellList.filter(cell => cell.oasis);
   }
 
-  get wilderness() {
+  get wilderness(): Array<Cell> {
     return this.cellList.filter(cell => !cell.oasis && !cell.resType);
+  }
+
+  get players(): Array<Cell> {
+    return this.playerList
+  }
+
+  get inactivePlayers(): Array<Player> {
+    return this.playerlist.filter(player => player.active === '0')
+  }
+
+  get kingdoms(): Array<Kingdom> {
+    return this.kingdomList
   }
 }
 
