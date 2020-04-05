@@ -1,4 +1,4 @@
-import { Account } from "../../../interface";
+import { Account } from "../../interface";
 import { UPDATE_ACCOUNT, RESET_ACCOUNT, RESET_WORLDNAME, AccountAction } from "./types";
 
 const initState: Account = {

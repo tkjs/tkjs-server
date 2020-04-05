@@ -1,4 +1,4 @@
-import { Session } from "../../../interface";
+import { Session } from "../../interface";
 
 export const UPDATE_SESSION = "UPDATE_SESSION";
 export const RESET_SESSION = "RESET_SESSION";

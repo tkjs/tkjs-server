@@ -8,8 +8,8 @@ import { extractor, range } from "../utilities";
 import { SessionNotFoundError } from "../errors";
 import { userAgent, regionIds } from "../constants";
 import { updateState, resetState, resetWorldname } from "../store";
-import { RequestPayload, Session, Store } from "../../interface";
-import { Cell, Player, Kingdom } from '../../interface/map'
+import { RequestPayload, Session, Store } from "../interface";
+import { Cell, Player, Kingdom } from "../interface/map";
 
 class Gameworld {
   static driver: AxiosInstance = axios.create({ headers: { ...userAgent } });

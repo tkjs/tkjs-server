@@ -1,4 +1,4 @@
-import { Coordinate } from "../interface";
+import { Coordinate } from "./interface";
 import { ExtractorNotFoundError, UndefinedTypeError } from "./errors";
 
 export function range(_p: number, _t?: number, _s?: number): Array<number> {
@@ -94,5 +94,5 @@ export function distance(source: Coordinate, target: Coordinate): number {
 }
 
 export function sleep(miliseconds: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, miliseconds * 1000))
+  return new Promise(resolve => setTimeout(resolve, miliseconds * 1000));
 }

@@ -1,5 +1,5 @@
 import store from "../store";
-import { Store, Account } from "../../interface";
+import { Store, Account } from "../interface";
 import { SessionNotFoundError, BadRequestError } from "../errors";
 
 class URL {

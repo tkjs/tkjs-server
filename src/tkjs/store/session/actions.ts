@@ -1,4 +1,4 @@
-import { Session } from "../../../interface";
+import { Session } from "../../interface";
 import { UPDATE_SESSION, RESET_SESSION, SessionAction } from "./types";
 
 export function updateSession(name: string, session: Session): SessionAction {

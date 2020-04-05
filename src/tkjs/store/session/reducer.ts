@@ -1,4 +1,4 @@
-import { Session } from "../../../interface";
+import { Session } from "../../interface";
 import { UPDATE_SESSION, RESET_SESSION, SessionAction, SessionReducer } from "./types";
 
 const initState: Session = {

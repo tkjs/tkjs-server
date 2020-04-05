@@ -1,4 +1,4 @@
-import { RegionIds } from "../interface";
+import { RegionIds } from "./interface";
 import { convertToCellId, range } from "./utilities";
 
 export const userAgent = {

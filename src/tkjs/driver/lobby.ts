@@ -8,7 +8,7 @@ import { userAgent } from "../constants";
 import { extractor } from "../utilities";
 import { SessionNotFoundError } from "../errors";
 import { updateState, resetState } from "../store";
-import { Session, RequestPayload, Store } from "../../interface";
+import { Session, RequestPayload, Store } from "../interface";
 
 class Lobby {
   static driver: AxiosInstance = axios.create({ headers: { ...userAgent } });

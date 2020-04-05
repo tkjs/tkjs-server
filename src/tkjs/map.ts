@@ -1,4 +1,4 @@
-import { Cell, Player, Kingdom } from "../interface/map";
+import { Cell, Player, Kingdom } from "./interface/map";
 
 class Map {
   private cellList: Array<Cell>;
@@ -32,15 +32,15 @@ class Map {
   }
 
   get players(): Array<Player> {
-    return this.playerList
+    return this.playerList;
   }
 
   get inactivePlayers(): Array<Player> {
-    return this.playerlist.filter(player => player.active === '0')
+    return this.playerlist.filter(player => player.active == 0);
   }
 
   get kingdoms(): Array<Kingdom> {
-    return this.kingdomList
+    return this.kingdomList;
   }
 }
 
