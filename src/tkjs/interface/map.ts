@@ -1,3 +1,4 @@
+import { Resources } from "./index";
 // All interface related to Map object
 
 export interface Cell {
@@ -45,4 +46,29 @@ export interface Player {
 export interface Kingdom {
   kingdomId: string;
   tag: string;
+}
+
+export interface MapDetails {
+  isOasis: boolean;
+  oasisType: string;
+  hasVillage: string;
+  hasNPC: number;
+  resType: string;
+  isHabitable: number;
+  landscape: string;
+  oasisBonus?: Resources;
+  troops?: any; // make troop interface for this
+  kingdomId?: number | string;
+  ownKingdomInfluence?: number;
+  defBonus?: number;
+  ownRank?: number;
+  playersWithTroops?: any;
+  oasisStatus?: string;
+  ownTroops?: any;
+  playerId?: string;
+  playerName?: string;
+  kingdomTag?: string;
+  population?: string;
+  tribe?: string;
+  treasures?: string | number;
 }
