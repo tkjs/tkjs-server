@@ -3,6 +3,7 @@ import { AxiosInstance, AxiosResponse } from "axios";
 
 import URL from "./url";
 import Map from "../map";
+import Villages from "../village";
 import store from "../store";
 import { extractor, range } from "../utilities";
 import { SessionNotFoundError } from "../errors";
@@ -10,6 +11,7 @@ import { userAgent, regionIds } from "../constants";
 import { updateState, resetState, resetWorldname } from "../store";
 import { RequestPayload, Session, Store } from "../interface";
 import { Cell, Player, Kingdom } from "../interface/map";
+import { Village as VillageInterface } from "../interface/village";
 
 class Gameworld {
   static driver: AxiosInstance = axios.create({ headers: { ...userAgent } });
@@ -68,7 +70,8 @@ class Gameworld {
       { headers: { cookie } }
     );
 
-    return response.data;
+    if (response.data.error) throw new Error(response.data.error.message);
+    else return response.data;
   }
 
   static async getCache(params: any): Promise<any> {
@@ -82,9 +85,14 @@ class Gameworld {
     return data;
   }
 
-  static async getOwnVillageList(): Promise<Array<any>> {
+  static async getVillages(): Promise<Villages> {
+    // get avatar's village data
+    let villageList: Array<VillageInterface>;
     const data: any = await Gameworld.getCache({ names: ["Collection:Village:own"] });
-    return data.cache[0].data.cache.map((village: any) => village.data); // only need village data
+
+    villageList = data.cache[0].data.cache.map((village: any) => village.data); // only need village data
+
+    return new Villages(villageList);
   }
 
   static async getMap(regionList: Array<string> = Object.keys(regionIds)): Promise<Map> {
