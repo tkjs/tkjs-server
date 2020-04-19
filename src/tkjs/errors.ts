@@ -25,3 +25,10 @@ export class ExtractorNotFoundError extends Error {
     this.name = "ExtractorNotFoundError";
   }
 }
+
+export class NotFoundError extends Error {
+  constructor(message: string = "It seems what you looking for is not found") {
+    super(message)
+    this.name = "NotFoundError"
+  }
+}
