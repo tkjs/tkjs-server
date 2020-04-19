@@ -1,12 +1,13 @@
-import { NotFoundError } from './errors'
-import { Village: VillageInterface } from './interfaces/village'
-import Gameworld from './driver/gameworld'
+import { NotFoundError } from "./errors";
+import { Village as VillageInterface } from "./interface/village";
+import Gameworld from "./driver/gameworld";
 
 class MasterBuilder {
   private driver: Gameworld = Gameworld;
+  villageId: string;
 
   constructor(villageId: string) {
-    this.villageId = villageId
+    this.villageId = villageId;
   }
 
   upgrade(building: string) {
@@ -14,27 +15,41 @@ class MasterBuilder {
   }
 }
 
+class RallyPoint {
+  private driver: Gameworld = Gameworld;
+  villageId: string;
+
+  constructor(villageId: string) {
+    this.villageId = villageId;
+  }
+}
+
 class Village {
   private data: VillageInterface;
   private driver: Gameworld = Gameworld;
-  // private rallyPoint: RallyPoint
-  private masterBuilder: MasterBuilder
+  private rallyPoint: RallyPoint;
+  private masterBuilder: MasterBuilder;
 
-  constructor(data: any) {
-    this.data = data
-    this.masterBuilder = new MasterBuilder(data.villageId)
+  constructor(data: VillageInterface) {
+    this.data = data;
+    this.rallyPoint = new RallyPoint(data.villageId);
+    this.masterBuilder = new MasterBuilder(data.villageId);
+  }
+
+  get details() {
+    return this.data;
   }
 
   get villageId() {
-    return this.data.villageId
+    return this.data.villageId;
   }
 
-  get villageName() {
-    return this.data.villageName
+  get name() {
+    return this.data.name;
   }
 
   get isMainVillage() {
-    return this.data.isMainVillage
+    return this.data.isMainVillage;
   }
 }
 
@@ -42,27 +57,30 @@ class Villages {
   // class for storing Village class
   private villageList: Array<Village>;
 
-  constructor(villageList: Array<any>) {
-    this.villageList = villageList.map(village => new Village(village))
+  constructor(villageList: Array<VillageInterface>) {
+    this.villageList = villageList.map((village: VillageInterface) => new Village(village));
   }
 
   get villages() {
-    return this.villageList
+    return this.villageList;
   }
 
   get capital() {
-    return this.villageList.find(village => village.isMainVillage)
+    return this.villageList.find((village: Village) => village.isMainVillage);
   }
 
-  getVillageByName(villageName) {
-    const village = this.villageList.find(village => village.name === villageName)
-    if (!village) throw new NotFoundError(`Village ${villageName} not found`)
-    return village
+  getVillageByName(villageName: string) {
+    /* case sensitive */
+    const village = this.villageList.find((village: Village) => village.name == villageName);
+    if (!village) throw new NotFoundError(`Village ${villageName} not found`);
+    return village;
   }
 
-  getVillageById(villageId) {
-    const village = this.villageList.find(village => village.villageId === villageId)
-    if (!village) throw new NotFoundError(`Village with id: ${villageId} not found`)
-    return village
+  getVillageById(villageId: string | number) {
+    const village = this.villageList.find((village: Village) => village.villageId == villageId);
+    if (!village) throw new NotFoundError(`Village with id: ${villageId} not found`);
+    return village;
   }
 }
+
+export default Villages
